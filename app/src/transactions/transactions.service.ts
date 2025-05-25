@@ -1,15 +1,11 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { TransactionRepository } from './transactions.repository';
-import { PrismaService } from 'src/prisma/prisma.service';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
 @Injectable()
 export class TransactionsService {
-  constructor(
-    private prisma: PrismaService,
-    private transactionRepository: TransactionRepository,
-  ) {}
+  constructor(private transactionRepository: TransactionRepository) {}
 
   async create(createTransactionDto: CreateTransactionDto) {
     const maxRetries = 3;

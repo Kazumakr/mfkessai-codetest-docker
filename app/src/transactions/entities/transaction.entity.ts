@@ -1,6 +1,6 @@
 export class Transaction {
-    id: number;
-    user_id: number;
-    amount: number;
-    description: string;
-  }
+  id: number;
+  user_id: number;
+  amount: number;
+  description: string;
+}
