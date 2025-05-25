@@ -9,9 +9,26 @@ services:
     ports:
       - 3306:3306
     hostname: db
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
 
   app:
     build:
       context: app
     ports:
       - 8888:8888
+    environment:
+      - DATABASE_URL=mysql://root:@db:3306/codetest
+      - PORT=8888
+    # depends_on:
+    #   - db
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./app:/app
+      - /app/node_modules

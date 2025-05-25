@@ -17,7 +17,8 @@ create table if not exists codetest.transactions
   user_id     int unsigned not null,
   amount      int          not null,
   description varchar(256) not null,
-  CONSTRAINT fk_transactions_users FOREIGN KEY (user_id) REFERENCES users (id)
+  CONSTRAINT fk_transactions_users FOREIGN KEY (user_id) REFERENCES users (id),
+  INDEX idx_user_id (user_id)
 ) character set utf8mb4 collate utf8mb4_bin;
 
 insert into codetest.users (name, api_key)
